@@ -32,7 +32,6 @@ dist-ssr
 
 # Google Cloud Service Account credentials (sensitive)
 src/API/calendario-caf-*.json
-*.json
 
 # Build files
 build/
