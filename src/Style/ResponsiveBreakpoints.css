@@ -1,0 +1,173 @@
+/* ResponsiveBreakpoints.css - Sistema de breakpoints para todo o site */
+
+:root {
+  /* Breakpoints */
+  --breakpoint-mobile: 480px;    /* Mobile pequeno */
+  --breakpoint-tablet: 768px;    /* Tablet */
+  --breakpoint-desktop: 1024px;  /* Desktop pequeno */
+  --breakpoint-large: 1440px;    /* Desktop grande */
+  
+  /* Container max-widths */
+  --container-mobile: 100%;
+  --container-tablet: 720px;
+  --container-desktop: 960px;
+  --container-large: 1200px;
+  
+  /* Spacing scale responsivo */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+  --spacing-xxl: 4rem;
+  
+  /* Typography scale responsivo */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+}
+
+/* Container responsivo base */
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--spacing-sm);
+}
+
+/* Media Queries Base */
+
+/* 1. Mobile pequeno (até 480px) */
+@media (max-width: 480px) {
+  :root {
+    --spacing-sm: 0.75rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.25rem;
+    --spacing-xl: 1.75rem;
+    --text-base: 0.9rem;
+    --text-lg: 1rem;
+    --text-xl: 1.125rem;
+    --text-2xl: 1.25rem;
+    --text-3xl: 1.5rem;
+    --text-4xl: 1.875rem;
+  }
+  
+  .container {
+    max-width: var(--container-mobile);
+    padding: 0 var(--spacing-sm);
+  }
+}
+
+/* 2. Mobile/Tablet (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .container {
+    max-width: var(--container-tablet);
+    padding: 0 var(--spacing-md);
+  }
+}
+
+/* 3. Tablet/Desktop pequeno (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .container {
+    max-width: var(--container-desktop);
+    padding: 0 var(--spacing-lg);
+  }
+}
+
+/* 4. Desktop grande (1025px+) */
+@media (min-width: 1025px) {
+  .container {
+    max-width: var(--container-large);
+    padding: 0 var(--spacing-xl);
+  }
+}
+
+/* Classes utilitárias responsivas */
+
+/* Visibilidade por breakpoint */
+.show-mobile { display: block; }
+.show-tablet { display: none; }
+.show-desktop { display: none; }
+.show-large { display: none; }
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .show-mobile { display: none; }
+  .show-tablet { display: block; }
+  .show-desktop { display: none; }
+  .show-large { display: none; }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .show-mobile { display: none; }
+  .show-tablet { display: none; }
+  .show-desktop { display: block; }
+  .show-large { display: none; }
+}
+
+@media (min-width: 1025px) {
+  .show-mobile { display: none; }
+  .show-tablet { display: none; }
+  .show-desktop { display: none; }
+  .show-large { display: block; }
+}
+
+/* Grid responsivo */
+.grid {
+  display: grid;
+  gap: var(--spacing-md);
+}
+
+.grid-1 { grid-template-columns: 1fr; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+@media (max-width: 768px) {
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Flexbox responsivo */
+.flex-responsive {
+  display: flex;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .flex-responsive {
+    flex-direction: column;
+  }
+}
+
+/* Spacing responsivo */
+.p-responsive { padding: var(--spacing-md); }
+.m-responsive { margin: var(--spacing-md); }
+.gap-responsive { gap: var(--spacing-md); }
+
+@media (max-width: 480px) {
+  .p-responsive { padding: var(--spacing-sm); }
+  .m-responsive { margin: var(--spacing-sm); }
+  .gap-responsive { gap: var(--spacing-sm); }
+}
+
+@media (min-width: 1025px) {
+  .p-responsive { padding: var(--spacing-lg); }
+  .m-responsive { margin: var(--spacing-lg); }
+  .gap-responsive { gap: var(--spacing-lg); }
+}

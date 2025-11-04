@@ -1,0 +1,353 @@
+
+
+/* Nav container - Base styles */
+.NavBar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.6rem 1.25rem;
+    background: rgb(255, 255, 255);
+    box-shadow: 0 6px 18px rgba(2,6,23,0.06);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: calc(100% - 2.5rem);
+    z-index: 1000;
+}
+
+/* Desktop first - padrões para desktop */
+.burger-menu {
+    display: none;
+}
+
+.menu-overlay {
+    display: none;
+}
+
+/* Brand (logo + site name) */
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.05rem;
+    line-height: 1;
+    user-select: none;
+}
+
+/* Logo wrapper and image sizing */
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 64px;
+    width: 64px;
+    border-radius: 8px;
+    padding: 6px;
+}
+
+.logo img {
+    display: block;
+    height: 100%;
+    width: auto;
+}
+
+/* Links container */
+.NavBar_Links {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Individual links */
+.NavBar_Links a {
+    color: black;
+    text-decoration: none;
+    padding: 0.45rem 0.75rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+/* Hover / focus states */
+.NavBar_Links a:hover,
+.NavBar_Links a:focus {
+    background:  rgba(245, 241, 1, 0.815);
+    outline: none;
+}
+
+/* Optional active style (for NavLink activeClassName) */
+.NavBar_Links a.active {
+    color: #fff;
+}
+
+/* Utility: ensure good focus visibility for keyboard users */
+
+/* =============================================== */
+/* BURGER MENU PARA NAVBAR */
+/* =============================================== */
+
+/* Botão burger - Melhorado para mobile */
+.burger-menu {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    z-index: 1002;
+    position: relative;
+    -webkit-tap-highlight-color: transparent; /* Remove highlight azul no iOS */
+    touch-action: manipulation; /* Melhora responsividade ao toque */
+}
+
+.burger-menu:hover {
+    background: rgba(245, 241, 1, 0.3);
+    transform: scale(1.05);
+}
+
+.burger-menu:active {
+    background: rgba(245, 241, 1, 0.5);
+    transform: scale(0.95);
+}
+
+/* Linhas do burger - Melhoradas */
+.burger-line {
+    width: 24px;
+    height: 3px;
+    background: #374151;
+    margin: 3px 0;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform-origin: center;
+    border-radius: 2px;
+    display: block;
+}
+
+/* Animações do burger quando aberto - Aprimoradas */
+.burger-menu.open .burger-line:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+    background: #ef4444; /* Cor vermelha quando aberto */
+}
+
+.burger-menu.open .burger-line:nth-child(2) {
+    opacity: 0;
+    transform: scale(0);
+}
+
+.burger-menu.open .burger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+    background: #ef4444; /* Cor vermelha quando aberto */
+}
+
+/* Overlay melhorado */
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh; /* Dynamic viewport height */
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 999;
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    opacity: 0;
+    animation: fadeIn 0.3s ease forwards;
+    touch-action: none; /* Previne scroll no body quando overlay está ativo */
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Prevenir scroll do body quando menu está aberto */
+body.menu-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+}
+
+/* Breakpoints para burger menu - Mobile First */
+
+/* Base mobile styles (até 768px) */
+@media (max-width: 768px) {
+    .burger-menu {
+        display: flex !important;
+        position: relative;
+        z-index: 1002;
+    }
+
+    .NavBar {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 1rem;
+        width: calc(100% - 2rem);
+        height: auto;
+        min-height: 60px;
+    }
+
+    .brand {
+        z-index: 1002;
+        position: relative;
+    }
+
+    .logo {
+        height: 50px !important;
+        width: 50px !important;
+    }
+
+    .NavBar_Links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        height: 100dvh; /* Dynamic viewport height para móveis */
+        background: white;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+        padding: 80px 0 20px;
+        gap: 0;
+        box-shadow: -4px 0 20px rgba(0, 0, 0, 0.2);
+        transition: right 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        z-index: 1001;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .NavBar_Links.menu-open {
+        right: 0;
+    }
+
+    .NavBar_Links a {
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
+        font-weight: 600;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        transition: all 0.2s ease;
+        text-align: left;
+        color: #374151;
+        text-decoration: none;
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .NavBar_Links a:hover,
+    .NavBar_Links a:focus {
+        background: rgba(245, 241, 1, 0.815);
+        padding-left: 2rem;
+        outline: none;
+    }
+
+    .NavBar_Links a:active {
+        background: rgba(245, 241, 1, 1);
+    }
+}
+
+/* Tablets (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+    .NavBar_Links {
+        width: 320px;
+        padding: 100px 0 20px;
+    }
+
+    .NavBar_Links a {
+        padding: 1.25rem 1.5rem;
+        font-size: 1.1rem;
+    }
+
+    .logo {
+        height: 55px !important;
+        width: 55px !important;
+    }
+}
+
+/* Mobile muito pequeno (até 480px) */
+@media (max-width: 480px) {
+    .NavBar {
+        padding: 0.4rem 0.75rem;
+        width: calc(100% - 1.5rem);
+    }
+
+    .NavBar_Links {
+        width: 260px;
+        padding: 70px 0 20px;
+    }
+
+    .NavBar_Links a {
+        padding: 0.875rem 1.25rem;
+        font-size: 0.95rem;
+    }
+
+    .logo {
+        height: 45px !important;
+        width: 45px !important;
+    }
+}
+
+/* Desktop (769px+) - Ocultar burger e mostrar menu normal */
+@media (min-width: 769px) {
+    .burger-menu {
+        display: none !important;
+    }
+
+    .menu-overlay {
+        display: none !important;
+    }
+
+    .NavBar {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.6rem 1.25rem;
+        width: calc(100% - 2.5rem);
+    }
+
+    .NavBar_Links {
+        position: static !important;
+        width: auto !important;
+        height: auto !important;
+        background: transparent !important;
+        flex-direction: row !important;
+        justify-content: flex-end !important;
+        align-items: center !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+        gap: 0.5rem !important;
+        overflow: visible !important;
+    }
+
+    .NavBar_Links a {
+        padding: 0.45rem 0.75rem !important;
+        font-size: 0.95rem !important;
+        font-weight: 600 !important;
+        border-bottom: none !important;
+        border-radius: 8px;
+        transition: background 0.2s ease !important;
+    }
+
+    .NavBar_Links a:hover,
+    .NavBar_Links a:focus {
+        background: rgba(245, 241, 1, 0.815) !important;
+        padding-left: 0.75rem !important;
+    }
+
+    .logo {
+        height: 64px !important;
+        width: 64px !important;
+    }
+}
